@@ -15,6 +15,8 @@ public class Prueba2 {
     añadi una visualizacion de justificantes para alumnis donde se ven los justificantes que estan regisytrados con su matricula
     lo mismo para validacion de padres solo aparecen los padres que se registran con la matricula de su hijo
     y tambien los criterios solo aparecen los que registro cada docente
+    
+    prueba de push
     */
     
     
