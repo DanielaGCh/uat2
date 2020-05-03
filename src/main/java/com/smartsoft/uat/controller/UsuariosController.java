@@ -68,7 +68,7 @@ public class UsuariosController implements Serializable{
         view.getEntity().setFechaRegistro(new Date());
     }
     public void validardocen(Usuarios docen){
-        //ya quedo correjido
+        //ya quedo correjido 2
         docen.setActivo(Boolean.TRUE);
         docen.setAutorizacion(Boolean.TRUE);
         business.guardar(docen);
