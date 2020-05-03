@@ -68,7 +68,9 @@ public class UsuariosController implements Serializable{
         view.getEntity().setFechaRegistro(new Date());
     }
     public void validardocen(Usuarios docen){
-        docen.setActivo(!docen.getActivo());
+        //ya quedo correjido
+        docen.setActivo(Boolean.TRUE);
+        docen.setAutorizacion(Boolean.TRUE);
         business.guardar(docen);
         sesion.MessageInfo(
                 docen.getActivo()? "Docente validado":"Docente invalidado"
