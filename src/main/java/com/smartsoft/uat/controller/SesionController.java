@@ -54,6 +54,31 @@ public class SesionController implements Serializable {
         }
         return "";
     }
+     
+        public String iniciarSesionWS(SesionView view, UsuariosBusiness usuariosBusiness) {
+         SesionView sView= new SesionView();
+        sView.setUsuario(usuariosBusiness.verificarAccesos(view.getUsuario().getCorreo(), view.getUsuario().getContrasena()));
+       
+        if (sView.getUsuario() != null)  {
+             if(sView.getUsuario().getAutorizacion()==null&&view.getUsuario().getFechaElimino()==null){
+                if(sView.getUsuario().getRol().equals("Docente")){
+                    sView.setUsuario(new Usuarios());
+                    return "Espere la validacion del coordinador";
+                }else{
+                     sView.setUsuario(new Usuarios());
+                return "Espere la validacion del alumno";
+                }
+               
+            }else{
+                return "1";
+            }
+        }
+           
+   
+            return "Verifique sus datos";
+        
+   
+    }
     
     
     public String registrarse (){

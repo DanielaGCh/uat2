@@ -141,6 +141,56 @@ public void guardar() {
             }
         }   
     }
+public String guardarWS( UsuariosView view,UsuariosBusiness business){
+    
+        if(view.getEntity().getRol().equals("Alumno")&&existeAlumWS(view,business)==true){
+           view.getEntity().setActivo(true);
+           view.getEntity().setAutorizacion(true);
+           business.guardar(view.getEntity());
+           return "Se registro exitosamente";
+ 
+           
+        }
+        else if(view.getEntity().getRol().equals("Alumno")&&existeAlumWS(view,business)==false){
+            return "La matricula no es valida";
+      
+        }
+        else if(view.getEntity().getRol().equals("Docente")){
+            view.getEntity().setActivo(Boolean.TRUE);
+           business.guardar(view.getEntity());
+           return "Se registro exitosamente";
+           
+        }
+        else if(view.getEntity().getRol().equals("Padre o Tutor")){
+            if(existeAlum()==true){
+                view.getEntity().setActivo(true);
+                view.getEntity().setAutorizacion(null);
+                business.guardar(view.getEntity());
+                return "Se registro exitosamente";
+            
+            }else{
+                return "La matricula no es valida";
+                
+            }
+        }  
+          return "1";
+     }
+public boolean existeUsuarioWS(UsuariosView view, UsuariosBusiness business ) {
+        if (business.existe(view.getEntity().getCorreo()) != null) {
+            return true;
+        }
+        return false;
+    }  
+
+////////////////////////
+public boolean existeAlumWS(UsuariosView view,UsuariosBusiness business) {
+        if (business.existeAlum(view.getEntity().getMatricula()) != null) {
+            return true;
+        }
+        return false;
+   
+        }
+
 public boolean camposVacios() {
         return view.getEntity().getApellidoMaterno().isEmpty()
                 ||view.getEntity().getApellidoPaterno().isEmpty()

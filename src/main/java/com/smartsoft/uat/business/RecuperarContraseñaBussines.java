@@ -83,6 +83,40 @@ public class RecuperarContraseñaBussines {
             Logger.getLogger(RecuperarContraseñaBussines.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+       public String  enviarCorreoWS( String destinatario) {
+        try {
+            if(dao.verificarCorreos(destinatario)==null){
+                return "Introduce un correo valido";
+               
+            }else{
+            Properties props = obtenerPropiedadesServidor();
+            Authenticator auth = obtenerAutentificacion(props);
+
+            Session session = Session.getInstance(props, auth);
+            MimeMessage msg = new MimeMessage(session);
+
+            msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
+            msg.addHeader("format", "flowed");
+            msg.addHeader("Content-Transfer-Encoding", "8bit");
+            msg.setDataHandler(null);
+            msg.setFrom(new InternetAddress(props.getProperty("config.from.email"), props.getProperty("config.from.name")));
+            msg.setSubject("Recuperar contreaseña");
+            msg.setText("Tu contraseña es:  " + dao.verificarCorreos(destinatario).getContrasena());
+//            msg.setSentDate(ManejadorFechas.obtenerFechaActualGTM());
+            msg.setRecipients(Message.RecipientType.TO, destinatario);
+//           msg = obtenerRemitentes(msg, correo.getListDireccionDestinatario());
+            
+              Transport.send(msg);
+            LOG.info("Mensaje enviado");
+            return "correo enviado";
+          
+            
+            }
+        } catch (MessagingException | UnsupportedEncodingException ex) {
+           return "Error verifique sus datos ";
+        }
+     
+    }
     public void MessageInfo(String message) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
     }

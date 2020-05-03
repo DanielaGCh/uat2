@@ -41,6 +41,9 @@ public class CorreoController implements Serializable{
         business.enviarCorreo(view.getDestinatario());
     }
     
+      public String  enviarCorreoWS(CorreoView view ,RecuperarContraseñaBussines bussines){
+       return  bussines.enviarCorreoWS(view.getDestinatario());
+    }
     
     public void MessageInfo(String message) {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
