@@ -14,6 +14,7 @@
                 <div class="Card">
                     <h:form id="form" >
                         <p:growl id="growl" showDetail="false" sticky="false" globalOnly="true" />
+                        <div class="EmptyBox50"></div>
                         <div class="Container100 TexAlCenter"  >
                             <div>
                                 <p:outputLabel value="Bienvenido" style="color: black; font-size: 30px; "/>
@@ -25,6 +26,44 @@
                         </center>
                     </div>
                     </div>
+                            <div class="EmptyBox100"></div>
+                            <div class="EmptyBox100"></div>
+                            <div class="EmptyBox30" >Notificaciones Boton de panico</div>
+                            
+                            
+                            
+                            <div class="Container100 " >
+                                <p:dataTable id="botonpanico"
+                                             var="boton" 
+                                             rows="6"
+                                             paginator="true" 
+                                             rowsPerPageTemplate="5,10,15,20,30,40,50,100,150,200"
+                                             emptyMessage="Sin notificaciones"
+                                             paginatorPosition="top"
+                                             reflow="false" 
+                                             value="#{botonController.view.listaEntity}">
+                                    
+                                    <p:column headerText="Fecha" > 
+                                        <h:outputText value="#{boton.fechaString(boton.fecha)} "  />
+                                    </p:column>
+                                    <p:column headerText="Matricula" > 
+                                        <h:outputText value="#{boton.matriculaRegistro}"  />
+                                    </p:column>
+                                    <p:column headerText="Nombre" > 
+                                        <h:outputText value="#{boton.nombreRegistro} "  />
+                                    </p:column>
+                                    <p:column headerText="Motivo" > 
+                                        <h:outputText value="#{boton.motivo}"  />
+                                    </p:column>
+                                    
+                                    <p:column headerText="Descripcion" > 
+                                        <h:outputText value="#{boton.descripcion} "  />
+                                    </p:column>
+
+                                    
+                                </p:dataTable>
+                            </div>
+                            
 
                     </h:form>
                 </div>

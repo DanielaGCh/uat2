@@ -18,12 +18,15 @@
                     <p:commandLink   style="text-decoration:  none" action="#{sesionController.cerrarSesion()}" class="usuarioSesion">
                         <i class="fa fa-power-off" style="color: white" ></i>
                     </p:commandLink>
+                    
+                    
                     <p:button outcome="productDetail" icon="pi pi-star" style="margin-right:20px;" title="Icon Only">
                         <f:param name="productId" value="30" />
                     </p:button>
                     <p:commandLink  value="Salir" style="text-decoration:  none" action="#{sesionController.cerrarSesion()}" class="usuarioSesion White">
                     </p:commandLink>
                 </div>
+                
             </div>
         </div>
     </h:form>

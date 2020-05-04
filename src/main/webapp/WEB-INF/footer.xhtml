@@ -6,7 +6,23 @@
     xmlns:p="http://primefaces.org/ui">
     <h:form id="footherform">    
         <div class="Container100 TexAlCenter" style="position:fixed;left:0;bottom:0;background: black;z-index: 9999999;opacity:.7">
-            <p:commandLink  value="2020 Copyright © APC AppClass Todos los derechos reservados." class="white" action="#{sesionController.cargaPagos()}" style="text-decoration: none"/>
+            <p:commandLink  value="2020 Copyright © APC AppClass Todos los derechos reservados." class="white" action="#{botonController.guardar()}" style="text-decoration: none"/>
+        </div>
+        
+        <div class="Container20 TexAlRight Responsive50" style="position:fixed; bottom:30px; right: 50px; border-radius: 100px">
+            <p:commandButton value="boton de panico" type="button" onclick="PF('dlg3').show();"  /> 
+            <p:dialog  header="Boton de panico" widgetVar="dlg3" showEffect="explode" hideEffect="clip" height="120" width="350" resizable="false" modal="true"  >
+                <div class="TexAlLeft">
+                    <p:outputLabel value="Motivo :" />
+                    <p:inputText value="#{botonController.view.entity.motivo}" ><p:ajax /></p:inputText>
+                    <div class="EmptyBox10"></div>
+                    <p:outputLabel value="Descripcion :(opcional)" />
+                    <p:inputText value="#{botonController.view.entity.descripcion}" ><p:ajax /></p:inputText>
+                    <div class="EmptyBox10"></div>
+                    <p:commandButton value="Guardar"  icon="fa  fa-floppy-o" actionListener="#{botonController.guardar()}" update="@form" class="White"/>
+                </div>
+               
+            </p:dialog>
         </div>
     </h:form>
 </ui:composition>
