@@ -2,8 +2,10 @@ package com.smartsoft.uat.webservice.service;
 
 import com.smartsoft.uat.business.HorariosBusiness;
 import com.smartsoft.uat.business.RecuperarContraseñaBussines;
+import com.smartsoft.uat.business.UnidadaprendizajeBusiness;
 import com.smartsoft.uat.business.UsuariosBusiness;
 import com.smartsoft.uat.controller.CorreoController;
+import com.smartsoft.uat.controller.DocenteController;
 import com.smartsoft.uat.controller.SesionController;
 import com.smartsoft.uat.controller.UsuariosController;
 import com.smartsoft.uat.controller.view.CorreoView;
@@ -29,7 +31,11 @@ public class ServicioWeb {
      @Inject
     private HorariosBusiness horariosbusiness;
       @Inject
+    private UnidadaprendizajeBusiness unidadAbusiness;
+      @Inject
     private RecuperarContraseñaBussines recupBussines;
+       @Inject
+    private HorariosBusiness horariosBussines;
     
      private Usuarios usuario;
      private UsuariosView usuariosView ;
@@ -106,6 +112,30 @@ public class ServicioWeb {
           
       return controller.enviarCorreoWS(view,recupBussines);
         
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getMariasDocente")
+    public String getMariasDocente(@WebParam(name = "matricula") String matricula) {
+        DocenteController controller = new DocenteController();  
+        
+         System.out.println("Holaaaaaaaaa");
+        System.out.println(controller.obtenerListaUnidades(unidadAbusiness, matricula));
+        
+      return  controller.obtenerListaUnidades(unidadAbusiness, matricula);
+      
+    }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getAulasUnidadAprendizaje")
+    public String getAulasUnidadAprendizaje(@WebParam(name = "unidadAprendizaje") String unidadAprendizaje) {
+      DocenteController controller = new DocenteController();
+       System.out.println(controller.obtenerAultaUnidadAprendizaje(unidadAprendizaje, horariosbusiness));
+        return   controller.obtenerAultaUnidadAprendizaje(unidadAprendizaje, horariosbusiness);
     }
 
     

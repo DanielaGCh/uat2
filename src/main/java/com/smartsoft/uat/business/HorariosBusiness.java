@@ -49,6 +49,11 @@ public class HorariosBusiness {
    public Horarios obtenerFolioMateria(String periodo,String unidadAprendizaje, String grupo) {
         return dao.obtenerFolioMateria(periodo,unidadAprendizaje, grupo);
     }
+   
+     public  List<Horarios> obtenerAulaUnidadAprendizaje(String unidadAprendizaje) {
+        return dao.obtenerAulaUnidadAprendizaje(unidadAprendizaje);
+    }
+    
     
     public Horarios consultar(Integer idhorario) {
         return dao.search(idhorario);

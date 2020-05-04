@@ -70,7 +70,7 @@ public class SesionController implements Serializable {
                 }
                
             }else{
-                return "1";
+                return "1,"+sView.getUsuario().getMatricula()+","+sView.getUsuario().getNombreCompleto()+","+sView.getUsuario().getRol();
             }
         }
            

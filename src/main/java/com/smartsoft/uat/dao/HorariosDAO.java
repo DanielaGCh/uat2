@@ -45,7 +45,12 @@ public class HorariosDAO extends EntitiManager<Horarios> {
         List<Horarios> lista = persistence.getMysql().createNamedQuery("Horarios.findFolio").setParameter("periodo", periodo).setParameter("unidadAprendizaje", unidadAprendizaje).setParameter("grupo", grupo).getResultList();
         return lista.size()>0?lista.get(0):null;
     }
-       
+    
+     public  List<Horarios> obtenerAulaUnidadAprendizaje(String unidadAprendizaje){
+        return  persistence.getMysql().createNamedQuery("Horarios.findByUnidadAprendizaje").setParameter("unidadAprendizaje", unidadAprendizaje).getResultList();
+        
+    }
+      
         
 //    public List<Horarios> obtenerMiListaUni(String matricula){
 //        return persistence.getMysql().createNamedQuery("Horarios.Horarios.findAllMatriculaDocente").setParameter("matricula", matricula).getResultList();
