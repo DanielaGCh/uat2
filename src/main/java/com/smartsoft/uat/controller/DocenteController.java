@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.smartsoft.uat.controller;
 
 import com.smartsoft.uat.business.EnrolarBusiness;
@@ -64,6 +60,11 @@ public class DocenteController {
     entity.setAutorizacion(false);
     sesion.MessageInfo("Alumno desenrolado");
     }
+    
+    public void pasarListaAlumno(String unidadAprendizaje, String aula){
+                        
+    }
+    
     
    public String obtenerAultaUnidadAprendizaje(String unidadAprendizaje,HorariosBusiness business ){
         List<Horarios> lista = business.obtenerAulaUnidadAprendizaje(unidadAprendizaje);

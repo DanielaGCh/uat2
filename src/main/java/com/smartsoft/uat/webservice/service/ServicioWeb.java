@@ -138,7 +138,18 @@ public class ServicioWeb {
         return   controller.obtenerAultaUnidadAprendizaje(unidadAprendizaje, horariosbusiness);
     }
 
-    
+        @WebMethod(operationName = "paseLista")
+    public String paseLista(@WebParam(name = "aula") String aula,
+                            @WebParam(name = "unidadAprendizaje") String unidadAprendizaje) {
+        DocenteController controller = new DocenteController();
+         
+           
+          
+      
+        return   "";
+        
+        
+    }
     
     
     
