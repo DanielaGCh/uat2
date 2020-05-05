@@ -16,7 +16,7 @@
                     <h:form id="form" >
                         <p:growl id="growl" showDetail="false" sticky="false" globalOnly="true" />
    
-                        <p:fragment rendered="#{enrolarController.view.entity == null}">
+                        <p:fragment rendered="#{desenrolarController.view.entity == null}">
 
                             <div class="Container100">
                             
@@ -25,12 +25,12 @@
                                 </div>
 
                                 <div class="Container20  Responsive50 " >
-                                 <p:selectOneMenu id="periodo" value="#{enrolarController.view.periodo}" 
+                                    <p:selectOneMenu id="periodo" value="#{desenrolarController.view.periodo}" 
                                         
                                                      appendTo="@this" effect="fade" converter="omnifaces.SelectItemsConverter" >            
                                         <f:selectItem  itemLabel="Seleccione" itemValue="#{null}"/>
-                                        <f:selectItems value="#{enrolarController.view.listaPeriodos}" var="periodo" itemLabel="#{periodo.nombreperiodo}" itemValue="#{periodo}" />
-                                        <p:ajax listener= "#{enrolarController.view.horario.periodo}" update=":form" />
+                                        <f:selectItems value="#{desenrolarController.view.listaPeriodos}" var="periodo" itemLabel="#{periodo.nombreperiodo}" itemValue="#{periodo}" />
+                                        
                                 </p:selectOneMenu>
                                 </div>
                             
@@ -40,31 +40,33 @@
                                 </div>
 
                                  <div class="Container20  Responsive50 " >
-                                 <p:selectOneMenu id="unidad" value="#{enrolarController.view.unidad}" 
+                                     <p:selectOneMenu id="unidad" value="#{desenrolarController.view.unidad}" 
                                        
                                                      appendTo="@this" effect="fade" converter="omnifaces.SelectItemsConverter" >            
                                         <f:selectItem  itemLabel="Seleccione" itemValue="#{null}"/>
-                                        <f:selectItems value="#{enrolarController.view.listaUnidad}" var="unidad" itemLabel="#{unidad.descripcion}" itemValue="#{unidad}" />
-                                        <p:ajax listener= "#{enrolarController.view.horario.unidadAprendizaje}" update=":form" />
-                                </p:selectOneMenu>
+                                        <f:selectItems value="#{desenrolarController.view.listaUnidad}" var="unidad" itemLabel="#{unidad.descripcion}" itemValue="#{unidad}" />
+                                        
+                                 </p:selectOneMenu>
                                 </div>
                             
-                                <div class="Container50 Responsive50" >
+                                
+                               <div class="Container50 Responsive50" >
                                     <div class="Container40 Responsive50"  >
-                                        <p:outputLabel value="grupo :" />
+                                        <p:outputLabel value="Grupo :" />
                                     </div> 
                                     <div class="Container60 Responsive50" >
-                                        <p:inputText value="#{enrolarController.view.horario.grupo}" ><p:ajax /></p:inputText>
+                                        <p:inputText value="#{desenrolarController.view.grupo}" >
+                                        </p:inputText>
                                     </div>
                                 </div>
                                 
                                 <div class="Container60 Responsive100" />
                                     <div class="Container20 Responsive100" >
-                                        <p:commandButton value="Buscar" icon="fa fa-reply" actionListener="#{enrolarController.obtenerListaDeEnrolados()}" update="@form" class="White" process="@this"/>
+                                        <p:commandButton value="Buscar" icon="fa fa-reply" actionListener="#{desenrolarController.obtenerFolioMateria()}" update="@form" class="White" process="@this"/>
                                     </div>
                             </div>    
                             
-                                                            <div class="EmptyBox30"/>
+                                <div class="EmptyBox30"/>
                                 <div class="Container100" >
                                     <p:dataTable id="Enrolados"
                                                  var="enrolado"
@@ -74,14 +76,14 @@
                                                  emptyMessage="Sin registros"
                                                  paginatorPosition="top"
                                                  reflow="true"
-                                                 value="#{enrolarController.view.listaEntity}">
+                                                 value="#{desenrolarController.view.listaEntity}">
                                         
                                                     <p:column headerText="Matricula">
                                                         <p:outputLabel value="#{enrolado.matriculaUsu}"/>
                                                     </p:column>
                                                     <p:column exportable="false" width="15%" headerText="Acciones">
-                                                        <p:commandLink title="Enrolarse Docente" actionListener="#{enrolarController.nuevo(unidadA.folio)}" update=":form">
-                                                            <i class="fa fa-check"/>
+                                                        <p:commandLink title="Desenrolar alumno" actionListener="#{enrolarController.validardocen(enrolado)}" update=":form">
+                                                            <i class="fa fa-times-circle"/>
                                                         </p:commandLink>
                                                     </p:column>
                                     </p:dataTable>
