@@ -2,15 +2,19 @@ package com.smartsoft.uat.webservice.service;
 
 import com.smartsoft.uat.business.HorariosBusiness;
 import com.smartsoft.uat.business.RecuperarContraseñaBussines;
+import com.smartsoft.uat.business.UbicacionBusiness;
 import com.smartsoft.uat.business.UnidadaprendizajeBusiness;
 import com.smartsoft.uat.business.UsuariosBusiness;
 import com.smartsoft.uat.controller.CorreoController;
 import com.smartsoft.uat.controller.DocenteController;
 import com.smartsoft.uat.controller.SesionController;
+import com.smartsoft.uat.controller.UbicacionController;
 import com.smartsoft.uat.controller.UsuariosController;
 import com.smartsoft.uat.controller.view.CorreoView;
 import com.smartsoft.uat.controller.view.SesionView;
+import com.smartsoft.uat.controller.view.UbicacionView;
 import com.smartsoft.uat.controller.view.UsuariosView;
+import com.smartsoft.uat.entity.Ubicacion;
 import com.smartsoft.uat.entity.Usuarios;
 import java.util.Date;
 import javax.ejb.LocalBean;
@@ -36,7 +40,10 @@ public class ServicioWeb {
     private RecuperarContraseñaBussines recupBussines;
        @Inject
     private HorariosBusiness horariosBussines;
+           @Inject
+    private UbicacionBusiness ubicacionBusiness;
     
+          
      private Usuarios usuario;
      private UsuariosView usuariosView ;
      private SesionView sesionView;
@@ -148,6 +155,25 @@ public class ServicioWeb {
       
         return   "";
         
+        
+    }
+       @WebMethod(operationName = "SetUbicacion")
+    public String SetUbicacion(@WebParam(name = "latitud") String latitud, 
+            @WebParam(name = "longitud") String longitud,
+            @WebParam(name = "matricula") String matricula) {
+        UbicacionController controller = new UbicacionController();
+        Ubicacion nuevaUbicacion = new Ubicacion();
+           System.out.println("Holaaaaaaaa");
+        nuevaUbicacion= new Ubicacion();    
+        nuevaUbicacion.setMatriculaAlumno(matricula);
+       nuevaUbicacion.setLatitud(Double.parseDouble(longitud));
+       nuevaUbicacion.setLatitud(Double.parseDouble(latitud));
+      
+       controller.nuevo(nuevaUbicacion);
+      
+      
+      System.out.println(latitud+","+longitud+","+matricula);
+        return controller.guardarWS(ubicacionBusiness);
         
     }
     
