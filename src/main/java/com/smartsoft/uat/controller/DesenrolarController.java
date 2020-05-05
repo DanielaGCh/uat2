@@ -60,13 +60,19 @@ public class DesenrolarController implements Serializable{
    public void obtenerFolioMateria(){
        view.setHorario(new Horarios());
         view.setHorario(businesshorarios.obtenerFolioMateria(view.getPeriodo().getNombreperiodo(),view.getUnidad().getDescripcion(), view.getGrupo()));
-        String folio =view.getHorario().getFolio();
-        view.setListaEntity(business.obtenerListaDeEnrolados(folio));
+        mostrar();
     }
+   public void mostrar(){
+       String folio =view.getHorario().getFolio();
+        view.setListaEntity(business.obtenerListaDeEnrolados(folio));
+   }
    
     public void desenrolarAlumno(Enrolar entity){
     entity.setAutorizacion(false);
     sesion.MessageInfo("Alumno desenrolado");
+    business.guardar(entity);
+    mostrar();
+ 
     }
    
        public DesenrolarView getView() {

@@ -46,6 +46,7 @@ public class EnrolarController implements Serializable{
         view = new EnrolarView();
         obtenerListaPeriodos();
         obtenerListaSemestres();
+        listaenrolado();
     }
     
     public void obtenerListaPeriodos(){
@@ -59,12 +60,16 @@ public class EnrolarController implements Serializable{
     public void obtenerListaUniApren(){
         view.setListaHorarios(businesshorarios.obtenerListaUniApren(view.getPeriodo().getNombreperiodo(), view.getSemestre().getNombresem()));
     }
+    public void listaenrolado(){
+        view.setListaenrolado(business.listaenrolado(sesion.getView().getUsuario().getMatricula()));
+    }
     
     public void mostrarLista(){
         view.setListaEntity(business.obtenerListaActivos(sesion.getView().getUsuario().getMatricula()));
+        
     }
     
-    public void nuevo(String folio) {
+    public void nuevo(String folio, String materia) {
         view.setEntity(new Enrolar());
         view.setListaEntity(null);
         view.getEntity().setFolioHorario(folio);
@@ -74,6 +79,8 @@ public class EnrolarController implements Serializable{
         view.getEntity().setAutorizacion(true);
         view.getEntity().setIdRegistro(sesion.getView().getUsuario().getId());
         view.getEntity().setFechaRegistro(new Date());
+        view.getEntity().setNombreMateria(materia);
+        view.getEntity().setNombreUsu(sesion.getView().getUsuario().getNombreCompleto());
         mostrarLista();
         guardar();
     }
@@ -95,6 +102,7 @@ public class EnrolarController implements Serializable{
          
         business.guardar(view.getEntity());
         sesion.MessageInfo("Enrolado a la unidad de aprendizaje");
+        listaenrolado();
     }
    
 

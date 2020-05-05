@@ -71,8 +71,9 @@
                                                     <p:column headerText="Unidad Aprendizaje">
                                                         <p:outputLabel value="#{unidadA.unidadAprendizaje}"/>
                                                     </p:column>
+                                                  
                                                     <p:column exportable="false" width="15%" headerText="Acciones">
-                                                        <p:commandLink title="Enrolarse Docente" actionListener="#{enrolarController.nuevo(unidadA.folio)}" update=":form">
+                                                        <p:commandLink title="Enrolarse Docente" actionListener="#{enrolarController.nuevo(unidadA.folio,unidadA.unidadAprendizaje)}" update=":form">
                                                             <i class="fa fa-check"/>
                                                         </p:commandLink>
                                                     </p:column>
@@ -84,7 +85,7 @@
                                 
                             </p:fragment>.
                         
-                            <p:fragment rendered="#{enrolarController.view.listaEntity!=null}">
+                           <!-- <p:fragment rendered="#{enrolarController.view.listaenrolado!=null}">-->
                             <div class="Container100  Responsive100 TexAlCenter" >
                                 <p:separator/>
                                 <p:outputLabel value="Mis unidades de aprendizaje" style="font-size: 22px !important;"/>
@@ -99,20 +100,20 @@
                                              emptyMessage="Sin registros"
                                              paginatorPosition="top"
                                              reflow="false" 
-                                             value="#{enrolarController.mostrarLista()}">
+                                             value="#{enrolarController.view.listaenrolado}">
 
                                      <p:column headerText="folio" > 
                                          <h:outputText value="#{enrol.folioHorario}"  />
                                     </p:column>
-                                    <!-- <p:column headerText="Unidad de aprendizaje" >
-                                        <h:outputText value="#{enrol.unidadAprendizaje}"/>
+                                    <p:column headerText="Unidad de aprendizaje" >
+                                        <h:outputText value="#{enrol.nombreMateria}"/>
                                     </p:column>
-                                    <p:column headerText="Docente" >
+                                   <!-- <p:column headerText="Docente" >
                                         <h:outputText value="#{enrol.aula}"   />
                                     </p:column> -->
                                 </p:dataTable>
                             </div>        
-                            </p:fragment>
+                           <!-- </p:fragment>-->
                         
                     </h:form>
                 </div>

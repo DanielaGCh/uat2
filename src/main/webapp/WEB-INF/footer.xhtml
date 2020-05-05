@@ -11,7 +11,7 @@
         
         <div class="Container20 TexAlRight Responsive50" style="position:fixed; bottom:30px; right: 50px; border-radius: 100px">
             <p:commandButton value="boton de panico" type="button" onclick="PF('dlg3').show();"  /> 
-            <p:dialog  header="Boton de panico" widgetVar="dlg3" showEffect="explode" hideEffect="clip" height="120" width="350" resizable="false" modal="true"  >
+            <p:dialog  header="Boton de panico" widgetVar="dlg3"   showEffect="explode" hideEffect="clip" height="120" width="350" resizable="false"   >
                 <div class="TexAlLeft">
                     <p:outputLabel value="Motivo :" />
                     <p:inputText value="#{botonController.view.entity.motivo}" ><p:ajax /></p:inputText>

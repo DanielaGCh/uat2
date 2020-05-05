@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Enrolar.findAllActivos", query = "SELECT e FROM Enrolar e WHERE e.activo = true and e.matriculaUsu = :matriculaUsu")
     , @NamedQuery(name = "Enrolar.findByAutorizacion", query = "SELECT e FROM Enrolar e WHERE e.autorizacion = :autorizacion")
     , @NamedQuery(name = "Enrolar.findByClave", query = "SELECT e FROM Enrolar e WHERE e.clave = :clave")
-    , @NamedQuery(name = "Enrolar.findByMatriculaUsu", query = "SELECT e FROM Enrolar e WHERE e.matriculaUsu = :matriculaUsu")
+    , @NamedQuery(name = "Enrolar.findByMatriculaUsu", query = "SELECT e FROM Enrolar e WHERE e.matriculaUsu = :matriculaUsu and e.activo=true and e.autorizacion=true")
     , @NamedQuery(name = "Enrolar.findByFolioHorario", query = "SELECT e FROM Enrolar e WHERE e.folioHorario = :folioHorario")
     , @NamedQuery(name = "Enrolar.findEnrolados", query = "SELECT e FROM Enrolar e WHERE e.activo = true and e.autorizacion = true and e.folioHorario = :folioHorario")
     , @NamedQuery(name = "Enrolar.findByFechaRegistro", query = "SELECT e FROM Enrolar e WHERE e.fechaRegistro = :fechaRegistro")
@@ -73,6 +73,12 @@ public class Enrolar implements Serializable {
     private Integer idRegistro;
     @Column(name = "id_elimino")
     private Integer idElimino;
+    @Size(max = 255)
+    @Column(name = "nombreusu")
+    private String nombreusu;
+    @Size(max = 255)
+    @Column(name = "nombremateria")
+    private String nombremateria;
 
     public Enrolar() {
     }
@@ -160,7 +166,21 @@ public class Enrolar implements Serializable {
     public void setIdElimino(Integer idElimino) {
         this.idElimino = idElimino;
     }
+    public String getNombreUsu() {
+        return nombreusu;
+    }
 
+    public void setNombreUsu(String nombreusu) {
+        this.nombreusu = nombreusu;
+    }
+
+    public String getNombreMateria() {
+        return nombremateria;
+    }
+
+    public void setNombreMateria(String nombremateria) {
+        this.nombremateria = nombremateria;
+    }
     @Override
     public int hashCode() {
         int hash = 0;

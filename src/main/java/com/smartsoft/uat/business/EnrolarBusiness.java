@@ -45,5 +45,9 @@ public class EnrolarBusiness {
    public List<Enrolar> obtenerListaDeEnrolados(String folio) {
         return dao.listaEnrolados(folio);
     }
+   
+      public List<Enrolar> listaenrolado(String matricula) {
+        return dao.listaenrolado(matricula);
+    }
 
 }

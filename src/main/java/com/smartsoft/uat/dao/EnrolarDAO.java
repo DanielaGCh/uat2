@@ -39,4 +39,9 @@ public class EnrolarDAO extends EntitiManager<Enrolar> {
     public List<Enrolar> listaEnrolados (String folio){
         return persistence.getMysql().createNamedQuery("Enrolar.findEnrolados").setParameter("folioHorario", folio).getResultList();
     }
+    //Lista que obtiene las materias en las que estoy enrolado
+     public List<Enrolar> listaenrolado(String matricula){
+        return persistence.getMysql().createNamedQuery("Enrolar.findByMatriculaUsu").setParameter("matriculaUsu",matricula).getResultList();
+    }
+    
 }
