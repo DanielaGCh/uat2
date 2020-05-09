@@ -11,6 +11,8 @@ import java.util.List;
 public class UbicacionView {
       private Ubicacion entity;
     private List<Ubicacion> listaEntity;
+    private List<Ubicacion> listaEntity2;
+    private List<Ubicacion> coordenadas;
     private Ubicacion ubicacion;
     
         public Ubicacion getEntity() {
@@ -37,4 +39,22 @@ public class UbicacionView {
         this.ubicacion = ubicacion;
     }*/
     
+    
+    public List<Ubicacion> getListaEntity2() {
+        return listaEntity2;
+    }
+    
+ 
+    public void setListaEntity2(List<Ubicacion> listaEntity2) {
+        this.listaEntity2 = listaEntity2;
+    }
+    
+    public List<Ubicacion> getCoordenadas() {
+        return coordenadas;
+    }
+    
+ 
+    public void setCoordenadas(List<Ubicacion> coordenadas) {
+        this.coordenadas = coordenadas;
+    }
 }

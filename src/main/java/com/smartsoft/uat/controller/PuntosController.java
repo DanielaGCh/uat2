@@ -58,7 +58,7 @@ public class PuntosController implements Serializable{
     public void nuevo() {
         view.setEntity(new Area());
         view.setListaEntity(null);
-        view.getEntity().setIdArea(0);
+       view.getEntity().setIdArea(0);
         //view.getEntity().setActivo(true);
         //view.getEntity().setIdRegistro(sesion.getView().getUsuario().getId());
         //view.getEntity().setFechaRegistro(new Date());
