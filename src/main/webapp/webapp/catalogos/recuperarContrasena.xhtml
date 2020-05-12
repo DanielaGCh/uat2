@@ -42,7 +42,8 @@
                                 <p:outputLabel value="Recuperar contraseña" style="color: black; font-size: 25px; "/>
                                 <p:growl id="growl" showDetail="true" sticky="true" />  
                             </center>
-                        </div>  
+                        </div> 
+                        
 
                         <div class="EmptyBox30"/>
                         <div class="Container50" />
@@ -55,11 +56,15 @@
                                 <div class="EmptyBox20"/>
 
                                 <div class="Container100 Responsive100 TexAlCenter">
-                                    <p:inputText value="#{correoController.view.destinatario}"/>
+                                    <p:inputText id="email"value="#{correoController.view.destinatario}" required="true" label="Email" validatorMessage="introduce un correo valido">
+                                        <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" /> 
+                                    </p:inputText>
+                                     <p:message for="email" /> 
                                 </div>
 
                                 <div class="EmptyBox20"/>
                             </div>
+                                
 
                         </div>
                         <div class="Container100 Responsive100 TexAlCenter"  >
@@ -87,5 +92,3 @@
 
     </h:body>
 </html>
-
-

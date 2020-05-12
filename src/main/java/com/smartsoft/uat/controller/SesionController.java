@@ -1,6 +1,7 @@
 package com.smartsoft.uat.controller;
 
 import com.smartsoft.uat.business.UsuariosBusiness;
+import com.smartsoft.uat.controller.view.AreaView;
 import com.smartsoft.uat.controller.view.SesionView;
 import com.smartsoft.uat.entity.Usuarios;
 import java.io.Serializable;

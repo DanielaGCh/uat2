@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/WEB-INF/template.xhtml" >
+        <ui:define name="titleModule">
+           Ubicacion del alumno
+        </ui:define>
+        <ui:define name="content">
+            <p:spacer height="20px" />
+            <div class="Container100 ui-fluid">
+                <div class="Card">
+                    <h:form id="form" >
+                        <p:growl id="messages" showDetail="true" />
+
+                        <p:fragment rendered="#{ubicacionController.view.listaEntity2!=null}">
+                            <div class="Container100">
+                                <p:dataTable var="ubi"
+                                             id="Ubicacion" 
+                                             
+                                                 rows="5"
+                                                 paginator="true"
+                                                 rowsPerPageTemplate="5"
+                                                 emptyMessage="Sin registros"
+                                                 paginatorPosition="top"
+                                                 reflow="true"
+                                             value="#{ubicacionController.view.listaEntity2}">
+                                    <p:column headerText="Matricula">
+                                        <h:outputText value="#{ubi.matriculaAlumno}" />
+                                    </p:column>
+                                    <p:column headerText="Nombre">
+                                        <h:outputText value="#{ubi.nombreAlumn}" />
+                                    </p:column>
+                                    <p:column headerText="Fecha">
+                                        <h:outputText value="#{ubi.fechaString(ubi.fecha)}" />
+                                    </p:column>
+                                    <p:column headerText="Hora">
+                                        <h:outputText value="#{ubi.horaString(ubi.hora)}" />
+                                    </p:column>
+                                    <p:column headerText="Ubicacion"  >
+                                         <p:commandLink value="Vizualizar" actionListener="#{ubicacionController.visualizar(ubi.latitud,ubi.longitud,ubi.matriculaAlumno)}" update=":form"></p:commandLink>
+                                    </p:column>
+
+
+                                </p:dataTable>
+                            </div>
+                        </p:fragment> 
+
+                        <p:fragment rendered="#{ubicacionController.view.entity!=null}">
+                            
+                            <p:gmap center="19.4336071,-98.1086915" zoom="12" type="HYBRID" style="width:100%;height:600px" 
+                                    model="#{ubicacionController.simpleModel}" >
+                            </p:gmap>
+                            <div class="EmptyBox10"></div>
+                            
+                                <div class="Container20 TexAlRight Responsive50" >
+                                    <p:commandButton icon="fa fa-reply"  class="White" action="#{ubicacionController.mostrarListahijos()}"  value="Regresar" update=":form"  />
+                                </div>
+                                
+                            
+
+                            
+                        </p:fragment> 
+                        
+                        
+
+
+
+
+
+
+
+
+
+                    </h:form>
+                    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA6tvzVNZ_lFVBS43uDv11zaoicsFycjA4" ></script>
+
+
+                </div>
+            </div>
+
+        </ui:define>
+    </ui:composition>
+</html>	

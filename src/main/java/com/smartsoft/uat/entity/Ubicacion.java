@@ -6,7 +6,9 @@
 package com.smartsoft.uat.entity;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -23,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author carlo
+ * @author andre
  */
 @Entity
 @Table(name = "ubicacion")
@@ -31,11 +33,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Ubicacion.findAll", query = "SELECT u FROM Ubicacion u")
     , @NamedQuery(name = "Ubicacion.findByIdUbicacion", query = "SELECT u FROM Ubicacion u WHERE u.idUbicacion = :idUbicacion")
-    , @NamedQuery(name = "Ubicacion.findByMatriculaAlumno", query = "SELECT u FROM Ubicacion u WHERE u.matriculaAlumno = :matriculaAlumno")
+    , @NamedQuery(name = "Ubicacion.findByMatriculaAlumno", query = "SELECT u FROM Ubicacion u WHERE u.matriculaAlumno = :matriculaAlumno ORDER BY u.fecha DESC,u.hora DESC")
     , @NamedQuery(name = "Ubicacion.findByLatitud", query = "SELECT u FROM Ubicacion u WHERE u.latitud = :latitud")
     , @NamedQuery(name = "Ubicacion.findByLongitud", query = "SELECT u FROM Ubicacion u WHERE u.longitud = :longitud")
     , @NamedQuery(name = "Ubicacion.findByFecha", query = "SELECT u FROM Ubicacion u WHERE u.fecha = :fecha")
-    , @NamedQuery(name = "Ubicacion.findByHora", query = "SELECT u FROM Ubicacion u WHERE u.hora = :hora")})
+    , @NamedQuery(name = "Ubicacion.findByHora", query = "SELECT u FROM Ubicacion u WHERE u.hora = :hora")
+    , @NamedQuery(name = "Ubicacion.findByNombreAlumn", query = "SELECT u FROM Ubicacion u WHERE u.nombreAlumn = :nombreAlumn")})
 public class Ubicacion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -58,6 +61,9 @@ public class Ubicacion implements Serializable {
     @Column(name = "hora")
     @Temporal(TemporalType.TIME)
     private Date hora;
+    @Size(max = 255)
+    @Column(name = "nombreAlumn")
+    private String nombreAlumn;
 
     public Ubicacion() {
     }
@@ -114,6 +120,14 @@ public class Ubicacion implements Serializable {
         this.hora = hora;
     }
 
+    public String getNombreAlumn() {
+        return nombreAlumn;
+    }
+
+    public void setNombreAlumn(String nombreAlumn) {
+        this.nombreAlumn = nombreAlumn;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -137,6 +151,19 @@ public class Ubicacion implements Serializable {
     @Override
     public String toString() {
         return "com.smartsoft.uat.entity.Ubicacion[ idUbicacion=" + idUbicacion + " ]";
+    }
+    
+       public String fechaString(Date fecha) {
+        SimpleDateFormat formatoFecha;
+        formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        formatoFecha.setTimeZone(TimeZone.getTimeZone("America/Mexico_City"));
+        return fecha!=null ? formatoFecha.format(fecha): "Sin definir" ;
+        }
+    public String horaString(Date fecha) {
+        SimpleDateFormat formatoFecha;
+        formatoFecha = new SimpleDateFormat("HH:MM");
+        formatoFecha.setTimeZone(TimeZone.getTimeZone("America/Mexico_City"));
+        return fecha!=null ? formatoFecha.format(fecha): "Sin definir" ;
     }
     
 }
