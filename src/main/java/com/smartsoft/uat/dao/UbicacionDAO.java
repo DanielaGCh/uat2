@@ -48,5 +48,11 @@ public class UbicacionDAO extends EntitiManager<Ubicacion>{
         return persistence.getMysql().createNamedQuery("Ubicacion.findByMatriculaAlumno").setParameter("matriculaAlumno",matricula).getResultList();
     }
 
+        public List<Ubicacion> getUbicacionAlumno(String matricula){
+        List<Ubicacion> lista = persistence.getMysql().createNamedQuery("Ubicacion.findByMatricula").setParameter("matriculaAlumno",matricula).getResultList();
+                 return lista.size()>0?lista:null;
+        }
+
+     
 
 }

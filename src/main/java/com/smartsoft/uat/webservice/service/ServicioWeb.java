@@ -176,8 +176,23 @@ public class ServicioWeb {
         return controller.guardarWS(ubicacionBusiness);
         
     }
+
+    /**
+     * Web service operation
+     */
+    @WebMethod(operationName = "getUbicacion")
+    public String getUbicacion(@WebParam(name = "matricula") String matricula) {
+        System.out.println(matricula);
+       UbicacionController controller = new UbicacionController();
+       
+        return controller.obtenerUbicacionAlumno(matricula,ubicacionBusiness);
+    }
+
+    }
+
+   
+ 
+   
     
     
     
-    
-}

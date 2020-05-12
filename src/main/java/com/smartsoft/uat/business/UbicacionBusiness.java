@@ -32,5 +32,7 @@ public class UbicacionBusiness {
      public List<Ubicacion> obtenerListahijos(String matricula) {
         return dao.listaDeHijos(matricula);
     }
-    
+      public List<Ubicacion> obtenerUbicacionAlumno(String matricula) {
+        return dao.getUbicacionAlumno(matricula);
+    }
 }

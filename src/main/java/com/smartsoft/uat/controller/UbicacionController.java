@@ -105,5 +105,20 @@ public class UbicacionController implements Serializable{
         simpleModel.addOverlay(new Marker(coord1, matricula));
         
  }
+ 
+ public String obtenerUbicacionAlumno(String matricula ,UbicacionBusiness business ){
+     String coordenadas="";
+     List<Ubicacion> list = business.obtenerUbicacionAlumno(matricula);
+     
+     if (list != null){
+         coordenadas = list.get(list.size()-1).getLatitud()+","+list.get(list.size()-1).getLongitud();
+     }
+     else{
+         coordenadas = "No hay registro";
+     }
+     
+     return coordenadas;
+     
+ }
     
 }
