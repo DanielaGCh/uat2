@@ -38,12 +38,20 @@ public class EnrolarBusiness {
         dao.deleteLogically(entity);
     }
 
-    public List<Enrolar> obtenerListaActivos(String matricula) {
-        return dao.listaActivos(matricula);
+    public List<Enrolar> obtenerListaActivos(String matricula, String periodo) {
+        return dao.listaActivos(matricula, periodo);
     }
     
-   public List<Enrolar> obtenerListaDeEnrolados(String folio) {
-        return dao.listaEnrolados(folio);
+   public List<Enrolar> obtenerListaDeEnrolados(String folio, String periodo) {
+        return dao.listaEnrolados(folio, periodo);
+    }
+
+    public Enrolar existe(String matriculaUsu, String folio, String periodo){
+        return dao.existeEnrolamiento(matriculaUsu, folio, periodo);
+    }
+   
+      public List<Enrolar> listaenrolado(String matricula) {
+        return dao.listaenrolado(matricula);
     }
 
 }

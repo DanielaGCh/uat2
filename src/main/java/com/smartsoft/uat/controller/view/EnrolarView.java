@@ -23,6 +23,7 @@ public class EnrolarView {
     
     private Enrolar entity;
     private List<Enrolar> listaEntity;
+    private List<Enrolar> listaenrolado;
     
     private Periodos periodo;
     private List<Periodos> listaPeriodos;
@@ -130,5 +131,12 @@ public class EnrolarView {
 //    public void setListafolios (List<Horarios> listaEntityfolios) {
 //        this.listaEntityfolios = listaEntityfolios;
 //    }
-    
+    //Lista para mis materias 
+    public List<Enrolar> getListaenrolado() {
+        return listaenrolado;
+    }
+
+    public void setListaenrolado(List<Enrolar> listaenrolado) {
+        this.listaenrolado = listaenrolado;
+    }
 }

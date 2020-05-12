@@ -46,6 +46,7 @@ public class EnrolarController implements Serializable{
         view = new EnrolarView();
         obtenerListaPeriodos();
         obtenerListaSemestres();
+        listaenrolado();
     }
     
     public void obtenerListaPeriodos(){
@@ -59,23 +60,39 @@ public class EnrolarController implements Serializable{
     public void obtenerListaUniApren(){
         view.setListaHorarios(businesshorarios.obtenerListaUniApren(view.getPeriodo().getNombreperiodo(), view.getSemestre().getNombresem()));
     }
-    
-    public void mostrarLista(){
-        view.setListaEntity(business.obtenerListaActivos(sesion.getView().getUsuario().getMatricula()));
+    public void listaenrolado(){
+        view.setListaenrolado(business.listaenrolado(sesion.getView().getUsuario().getMatricula()));
     }
     
-    public void nuevo(String folio) {
+    public void mostrarLista(String periodo){
+        System.out.print("periodo "+periodo);
+        view.setListaEntity(business.obtenerListaActivos(sesion.getView().getUsuario().getMatricula(),periodo));
+        
+    }
+    
+    public void nuevo(String folio, String materia, String periodo) {
+       
+        
+        if (existeEnrolamiento(sesion.getView().getUsuario().getMatricula(),folio, periodo)== true) {
+            sesion.MessageInfo("Ya se encuentra enrolado");
+            mostrarLista(periodo);
+            return;
+        }
         view.setEntity(new Enrolar());
         view.setListaEntity(null);
         view.getEntity().setFolioHorario(folio);
+        view.getEntity().setPeriodo(periodo);
         view.getEntity().setMatriculaUsu(sesion.getView().getUsuario().getMatricula());
         view.getEntity().setId(0);
         view.getEntity().setActivo(true);
         view.getEntity().setAutorizacion(true);
         view.getEntity().setIdRegistro(sesion.getView().getUsuario().getId());
         view.getEntity().setFechaRegistro(new Date());
-        mostrarLista();
+        view.getEntity().setNombremateria(materia);
+        view.getEntity().setNombreusu(sesion.getView().getUsuario().getNombreCompleto());
+        mostrarLista(periodo);
         guardar();
+        
     }
 
     public void validardocen(Enrolar entity){
@@ -95,8 +112,15 @@ public class EnrolarController implements Serializable{
          
         business.guardar(view.getEntity());
         sesion.MessageInfo("Enrolado a la unidad de aprendizaje");
+        listaenrolado();
     }
    
+    public boolean existeEnrolamiento(String matricula, String folio, String periodo) {
+        if (business.existe(matricula, folio, periodo)!=null) {
+            return true;
+        }
+        return false;
+    } 
 
     public EnrolarView getView() {
         return view;

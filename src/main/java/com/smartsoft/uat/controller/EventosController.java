@@ -61,7 +61,7 @@ public class EventosController implements Serializable{
 
     public void guardar() {
 
-        if(view.getEntity() == null){
+        if(camposVacios()==true){
                 sesion.MessageError("Introduce los datos correctamente");
                  return;
             }
@@ -76,6 +76,19 @@ public class EventosController implements Serializable{
             return true;
         }
         return false;
+    }
+    
+        public boolean camposVacios(){
+        if(view.getEntity().getAsunto().isEmpty()
+                ||view.getEntity().getFecha()==null
+                ||view.getEntity().getHora()==null
+                ||view.getEntity().getLugar().isEmpty()
+                ||view.getEntity().getDescripcion().isEmpty()){
+            return true;
+            
+        }else{
+            return false;
+        }
     }
     
     public EventosView getView() {

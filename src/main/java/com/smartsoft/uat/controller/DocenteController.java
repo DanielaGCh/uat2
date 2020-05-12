@@ -53,7 +53,8 @@ public class DocenteController {
        view.setHorario(new Horarios());
         view.setHorario(businesshorarios.obtenerFolioMateria(view.getPeriodo().getNombreperiodo(),view.getUnidad().getDescripcion(), view.getGrupo()));
         String folio =view.getHorario().getFolio();
-        view.setListaEntity(business.obtenerListaDeEnrolados(folio));
+        String periodo = view.getHorario().getPeriodo();
+        view.setListaEntity(business.obtenerListaDeEnrolados(folio, periodo));
     }
    
     public void desenrolarAlumno(Enrolar entity){

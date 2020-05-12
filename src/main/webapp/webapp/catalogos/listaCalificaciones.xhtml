@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/WEB-INF/template.xhtml" >
+
+        <ui:define name="titleModule">
+            Lista de Calificaciones
+        </ui:define>
+        <ui:define name="content">
+            <p:spacer height="20px" />
+            <div class="Container100 ui-fluid">
+                <div class="Card">
+                    <h:form id="form" >
+                        <p:growl id="growl" showDetail="false" sticky="false" globalOnly="true" />
+                        <p:fragment rendered="#{calificacionesController.view.entity==null}">
+                            
+                             <div class="Container100">
+                            
+                             <div class="Container10 Responsive50 TexAlRight">
+                                    <p:outputLabel value="Periodo: "/>
+                                </div>
+
+                                <div class="Container20  Responsive50 " >
+                                    <p:selectOneMenu id="periodo" value="#{calificacionesController.view.periodo}" 
+                                        
+                                                     appendTo="@this" effect="fade" converter="omnifaces.SelectItemsConverter" >            
+                                        <f:selectItem  itemLabel="Seleccione" itemValue="#{null}"/>
+                                        <f:selectItems value="#{calificacionesController.view.listaPeriodos}" var="periodo" itemLabel="#{periodo.nombreperiodo}" itemValue="#{periodo}" />
+                                        
+                                </p:selectOneMenu>
+                                </div>
+                            
+                           
+                                <div class="Container20 Responsive50 TexAlRight">
+                                    <p:outputLabel value="Unidad de aprendizaje: "/>
+                                </div>
+
+                                 <div class="Container20  Responsive50 " >
+                                     <p:selectOneMenu id="unidad" value="#{calificacionesController.view.unidad}" 
+                                       
+                                                     appendTo="@this" effect="fade" converter="omnifaces.SelectItemsConverter" >            
+                                        <f:selectItem  itemLabel="Seleccione" itemValue="#{null}"/>
+                                        <f:selectItems value="#{calificacionesController.view.listaUnidad}" var="unidad" itemLabel="#{unidad.descripcion}" itemValue="#{unidad}" />
+                                        
+                                 </p:selectOneMenu>
+                                </div>
+                                 
+                                <div class="Container20 Responsive20" >
+                                    <div class="Container40 Responsive50 TexAlRight"  >
+                                        <p:outputLabel value="Grupo :"  />
+                                    </div> 
+                                    <div class="Container60 Responsive50" >
+                                        <p:inputText value="#{calificacionesController.view.grupo}" >
+                                        </p:inputText>
+                                    </div>
+                                </div>
+                                 
+                                 <div class="EmptyBox20"/>
+                                 
+                                 <div class="Container30 Responsive50 TexAlRight">
+                                    <p:outputLabel value="Criterio de evaluación: "/>
+                                </div>
+
+                                 <div class="Container20  Responsive50 " >
+                                     <p:selectOneMenu id="criterio" value="#{calificacionesController.view.entityCriterios}" 
+                                       
+                                                     appendTo="@this" effect="fade" converter="omnifaces.SelectItemsConverter" >            
+                                        <f:selectItem  itemLabel="Seleccione" itemValue="#{null}"/>
+                                        <f:selectItems value="#{calificacionesController.view.listaEntityCriterios}" var="criterio" itemLabel="#{criterio.nombre}" itemValue="#{criterio}" />
+                                        
+                                 </p:selectOneMenu>
+                                </div>
+                                
+                                <div class="Container25 Responsive40" >
+                                    <div class="Container40 Responsive50 TexAlRight"  >
+                                        <p:outputLabel value="Parcial :"  />
+                                    </div>
+                                    <div class="Container60 Responsive20" >
+                                        <p:inputText value="#{calificacionesController.view.parcial}" >
+                                        </p:inputText>
+                                    </div>
+                                </div>
+                                 
+                                <div class="EmptyBox10"/>
+                                
+                                <div class="Container20 Responsive100" >
+                                    <p:commandButton value="Lista de alumnos" icon="fa fa-search" actionListener="#{calificacionesController.copiarlista()}" update="@form" class="White" process="@this"/>
+                                </div>
+                            </div>  
+                                 
+                              <div class="EmptyBox30"/>
+                                <div class="Container100" >
+                                    <p:dataTable id="Enrolado"
+                                                 var="enrolado"
+                                                 rows="5"
+                                                 paginator="true"
+                                                 editable="true"
+                                                 rowsPerPageTemplate="5,10,15,20,30,40,50,100,150,200,300,500,1000"
+                                                 emptyMessage="Sin registros"
+                                                 paginatorPosition="top"
+                                                 reflow="true"
+                                                 value="#{calificacionesController.view.listaEntity}">
+                                        
+                                                    <p:ajax event="rowEdit" listener="#{calificacionesController.editar(enrolado)}"/>
+                                        
+                                                    <p:column headerText="Matricula">
+                                                        <p:outputLabel value="#{enrolado.matriculaAlum}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Nombre del alumno">
+                                                        <p:outputLabel value="#{enrolado.nomAlumno}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Calificación">
+                                                        <p:cellEditor>
+                                                         <f:facet name="output"><h:outputText value="#{enrolado.calificacion}" /></f:facet>
+                                                         <f:facet name="input"><p:inputText value="#{enrolado.calificacion}" style="width:100%" label="Year"/></f:facet>                                                       
+                                                        </p:cellEditor>
+                                                    </p:column>
+                                        
+                                                    <p:column style="width:35px">
+                                                        <p:rowEditor />
+                                                    </p:column>    
+                                        
+                                    </p:dataTable>
+                                </div> 
+                                 
+                              
+                              
+                                 <div class="Container100 Responsive50" >
+                                <div class="EmptyBox30"/>
+                                <div class="Container80 Responsive50" />
+                                <div class="Container20 TexAlRight Responsive50" >
+                                    <p:commandButton icon="fa fa-plus"  class="White" action="/webapp/catalogos/promedios.xhtml?faces-redirect=true"   value="Promediar" update=":form"  />
+                                </div>
+                                </div>     
+                                 </p:fragment>
+                        
+                            <!--<div >
+                                <div class="EmptyBox30"/>
+                                <div class="Container80 Responsive50" />
+                                <div class="Container20 TexAlRight Responsive50" >
+                                    <p:commandButton icon="fa fa-plus"  class="White" action="#{calificacionesController.nuevo()}"  value="Calificar Criterio" update=":form"  />
+                                </div>
+                            </div>-->
+                           
+                        
+                            <!--<p:fragment rendered="#{calificacionesController.view.entity!=null}">
+                            
+                            <div class="Container100">
+                            
+                             <div class="Container10 Responsive50 TexAlRight">
+                                    <p:outputLabel value="Periodo: "/>
+                                </div>
+
+                                <div class="Container20  Responsive50 " >
+                                    <p:selectOneMenu id="periodonuevo" value="#{calificacionesController.view.periodo}" 
+                                        
+                                                     appendTo="@this" effect="fade" converter="omnifaces.SelectItemsConverter" >            
+                                        <f:selectItem  itemLabel="Seleccione" itemValue="#{null}"/>
+                                        <f:selectItems value="#{calificacionesController.view.listaPeriodos}" var="periodo" itemLabel="#{periodo.nombreperiodo}" itemValue="#{periodo}" />
+                                        
+                                </p:selectOneMenu>
+                                </div>
+                            
+                           
+                                <div class="Container30 Responsive50 TexAlRight">
+                                    <p:outputLabel value="Unidad de aprendizaje: "/>
+                                </div>
+
+                                 <div class="Container20  Responsive50 " >
+                                     <p:selectOneMenu id="unidadnuevo" value="#{calificacionesController.view.unidad}" 
+                                       
+                                                     appendTo="@this" effect="fade" converter="omnifaces.SelectItemsConverter" >            
+                                        <f:selectItem  itemLabel="Seleccione" itemValue="#{null}"/>
+                                        <f:selectItems value="#{calificacionesController.view.listaUnidad}" var="unidad" itemLabel="#{unidad.descripcion}" itemValue="#{unidad}" />
+                                        
+                                 </p:selectOneMenu>
+                                </div>
+                                 
+                                <div class="Container70 Responsive20" >
+                                    <div class="Container40 Responsive50 TexAlRight"  >
+                                        <p:outputLabel value="Grupo :"  />
+                                    </div> 
+                                    <div class="Container20 Responsive50" >
+                                        <p:inputText value="#{calificacionesController.view.grupo}" >
+                                        </p:inputText>
+                                    </div>
+                                </div>
+                                 
+                                <div class="EmptyBox10"/>
+                                
+                                <div class="Container60 Responsive100" />
+                                <div class="Container20 Responsive100" >
+                                    <p:commandButton value="Buscar" icon="fa fa-search" actionListener="#{calificacionesController.copiarlista()}" update="@form" class="White" process="@this"/>
+                                </div>
+                            </div>                        
+                    
+                              <div class="EmptyBox30"/>
+                              <div class="Container20  Responsive50 " >
+                                     <p:selectOneMenu id="criterio" value="#{calificacionesController.view.entityCriterios}" 
+                                       
+                                                     appendTo="@this" effect="fade" converter="omnifaces.SelectItemsConverter" >            
+                                        <f:selectItem  itemLabel="Seleccione" itemValue="#{null}"/>
+                                        <f:selectItems value="#{calificacionesController.view.listaEntityCriterios}" var="criterio" itemLabel="#{criterio.nombre}" itemValue="#{criterio}" />
+                                        
+                                 </p:selectOneMenu>
+                                </div>
+                              <div class="Container25 Responsive40" >
+                                    <div class="Container40 Responsive50 TexAlRight"  >
+                                        <p:outputLabel value="Parcial :"  />
+                                    </div>
+                                    <div class="Container60 Responsive20" >
+                                        <p:inputText value="#{calificacionesController.view.parcial}" >
+                                        </p:inputText>
+                                    </div>
+                                </div>
+                              
+                              <div class="EmptyBox20"/>
+                              
+                                <div class="Container100" >
+                                    <p:dataTable id="ListaCalificaciones"
+                                                 var="alumno"
+                                                 rows="5"
+                                                 paginator="true"
+                                                 rowsPerPageTemplate="5,10,15,20,30,40,50,100,150,200,300,500,1000"
+                                                 emptyMessage="Sin registros"
+                                                 paginatorPosition="top"
+                                                 reflow="true"
+                                                 value="#{calificacionesController.view.listaEntity}">
+                                        
+                                                    <p:column headerText="Matricula">
+                                                        <p:outputLabel value="#{alumno.matriculaAlum}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Nombre del alumno">
+                                                        <p:outputLabel value="#{alumno.nomAlumno}"/>
+                                                    </p:column>
+                                                    <p:column exportable="false" width="15%" headerText="Calificacion"  > 
+                                                        <div class="TexAlCenter">
+                                                            <p:inputNumber id="input1" value="#{calificacionesController.view.calificacion}">  
+                                                                <p:ajax update="output1" />  
+                                                            </p:inputNumber>
+                                                        </div>
+                                                    </p:column>
+                                        </p:dataTable>
+                                     </div> 
+                              
+                                        <div >
+                                            <div class="EmptyBox30"/>
+                                            <div class="Container80 Responsive50" />
+                                            <div class="Container20 TexAlRight Responsive50" >
+                                                <p:commandButton icon="fa fa-plus"  class="White" action="#{calificacionesController.guardar()}"  value="guardar" update=":form"  />
+                                            </div>
+                                        </div>
+                            </p:fragment>-->
+                         
+                    </h:form>
+                </div>
+            </div>
+        </ui:define>
+    </ui:composition>
+</html>	

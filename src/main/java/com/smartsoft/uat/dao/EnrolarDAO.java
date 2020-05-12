@@ -32,11 +32,24 @@ public class EnrolarDAO extends EntitiManager<Enrolar> {
         return persistence.getMysql();
     }
     
-    public List<Enrolar> listaActivos(String matriculaUsu){
-        return persistence.getMysql().createNamedQuery("Enrolar.findAllActivos").setParameter("matriculaUsu", matriculaUsu).getResultList();
+    public List<Enrolar> listaActivos(String matriculaUsu, String periodo){
+        return persistence.getMysql().createNamedQuery("Enrolar.findAllActivos").setParameter("matriculaUsu", matriculaUsu).setParameter("periodo", periodo).getResultList();
     }
     
-    public List<Enrolar> listaEnrolados (String folio){
-        return persistence.getMysql().createNamedQuery("Enrolar.findEnrolados").setParameter("folioHorario", folio).getResultList();
+    public List<Enrolar> listaEnrolados (String folio, String periodo){
+        return persistence.getMysql().createNamedQuery("Enrolar.findEnrolados")
+                .setParameter("periodo", periodo)
+                .setParameter("folioHorario", folio).getResultList();
+    }
+    //Lista que obtiene las materias en las que estoy enrolado
+     public List<Enrolar> listaenrolado(String matricula){
+        return persistence.getMysql().createNamedQuery("Enrolar.findByMatriculaUsu").setParameter("matriculaUsu",matricula).getResultList();
+    }
+    
+    public Enrolar existeEnrolamiento(String matrculausu, String folio, String periodo){
+        List<Enrolar> lista = persistence.getMysql().createNamedQuery("Enrolar.existe")
+                .setParameter("periodo", periodo).setParameter("matriculaUsu", matrculausu)
+                .setParameter("folioHorario", folio).getResultList();
+        return lista.size()>0?lista.get(0):null;
     }
 }

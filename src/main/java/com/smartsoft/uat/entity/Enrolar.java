@@ -23,7 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author DaniGCh
+ * @author chave
  */
 @Entity
 @Table(name = "enrolar")
@@ -32,16 +32,19 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Enrolar.findAll", query = "SELECT e FROM Enrolar e")
     , @NamedQuery(name = "Enrolar.findById", query = "SELECT e FROM Enrolar e WHERE e.id = :id")
     , @NamedQuery(name = "Enrolar.findByActivo", query = "SELECT e FROM Enrolar e WHERE e.activo = :activo")
-    , @NamedQuery(name = "Enrolar.findAllActivos", query = "SELECT e FROM Enrolar e WHERE e.activo = true and e.matriculaUsu = :matriculaUsu")
     , @NamedQuery(name = "Enrolar.findByAutorizacion", query = "SELECT e FROM Enrolar e WHERE e.autorizacion = :autorizacion")
-    , @NamedQuery(name = "Enrolar.findByClave", query = "SELECT e FROM Enrolar e WHERE e.clave = :clave")
     , @NamedQuery(name = "Enrolar.findByMatriculaUsu", query = "SELECT e FROM Enrolar e WHERE e.matriculaUsu = :matriculaUsu")
+    , @NamedQuery(name = "Enrolar.findAllActivos", query = "SELECT e FROM Enrolar e WHERE e.matriculaUsu = :matriculaUsu and e.activo=true and e.autorizacion=true and e.periodo = :periodo")
+     , @NamedQuery(name = "Enrolar.existe", query = "SELECT e FROM Enrolar e WHERE e.matriculaUsu = :matriculaUsu and e.activo=true and e.autorizacion=true and e.periodo = :periodo and e.folioHorario = :folioHorario")
+    , @NamedQuery(name = "Enrolar.findEnrolados", query = "SELECT e FROM Enrolar e WHERE e.activo = true and e.autorizacion = true and e.folioHorario = :folioHorario and e.periodo = :periodo")
+    , @NamedQuery(name = "Enrolar.findByPeriodo", query = "SELECT e FROM Enrolar e WHERE e.periodo = :periodo")
     , @NamedQuery(name = "Enrolar.findByFolioHorario", query = "SELECT e FROM Enrolar e WHERE e.folioHorario = :folioHorario")
-    , @NamedQuery(name = "Enrolar.findEnrolados", query = "SELECT e FROM Enrolar e WHERE e.activo = true and e.autorizacion = true and e.folioHorario = :folioHorario")
     , @NamedQuery(name = "Enrolar.findByFechaRegistro", query = "SELECT e FROM Enrolar e WHERE e.fechaRegistro = :fechaRegistro")
     , @NamedQuery(name = "Enrolar.findByFechaElimino", query = "SELECT e FROM Enrolar e WHERE e.fechaElimino = :fechaElimino")
     , @NamedQuery(name = "Enrolar.findByIdRegistro", query = "SELECT e FROM Enrolar e WHERE e.idRegistro = :idRegistro")
-    , @NamedQuery(name = "Enrolar.findByIdElimino", query = "SELECT e FROM Enrolar e WHERE e.idElimino = :idElimino")})
+    , @NamedQuery(name = "Enrolar.findByIdElimino", query = "SELECT e FROM Enrolar e WHERE e.idElimino = :idElimino")
+    , @NamedQuery(name = "Enrolar.findByNombremateria", query = "SELECT e FROM Enrolar e WHERE e.nombremateria = :nombremateria")
+    , @NamedQuery(name = "Enrolar.findByNombreusu", query = "SELECT e FROM Enrolar e WHERE e.nombreusu = :nombreusu")})
 public class Enrolar implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -54,12 +57,12 @@ public class Enrolar implements Serializable {
     private Boolean activo;
     @Column(name = "autorizacion")
     private Boolean autorizacion;
-    @Size(max = 5)
-    @Column(name = "clave")
-    private String clave;
     @Size(max = 8)
     @Column(name = "matricula_usu")
     private String matriculaUsu;
+    @Size(max = 255)
+    @Column(name = "periodo")
+    private String periodo;
     @Size(max = 10)
     @Column(name = "folio_horario")
     private String folioHorario;
@@ -73,6 +76,12 @@ public class Enrolar implements Serializable {
     private Integer idRegistro;
     @Column(name = "id_elimino")
     private Integer idElimino;
+    @Size(max = 255)
+    @Column(name = "nombremateria")
+    private String nombremateria;
+    @Size(max = 255)
+    @Column(name = "nombreusu")
+    private String nombreusu;
 
     public Enrolar() {
     }
@@ -105,20 +114,20 @@ public class Enrolar implements Serializable {
         this.autorizacion = autorizacion;
     }
 
-    public String getClave() {
-        return clave;
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
-
     public String getMatriculaUsu() {
         return matriculaUsu;
     }
 
     public void setMatriculaUsu(String matriculaUsu) {
         this.matriculaUsu = matriculaUsu;
+    }
+
+    public String getPeriodo() {
+        return periodo;
+    }
+
+    public void setPeriodo(String periodo) {
+        this.periodo = periodo;
     }
 
     public String getFolioHorario() {
@@ -159,6 +168,22 @@ public class Enrolar implements Serializable {
 
     public void setIdElimino(Integer idElimino) {
         this.idElimino = idElimino;
+    }
+
+    public String getNombremateria() {
+        return nombremateria;
+    }
+
+    public void setNombremateria(String nombremateria) {
+        this.nombremateria = nombremateria;
+    }
+
+    public String getNombreusu() {
+        return nombreusu;
+    }
+
+    public void setNombreusu(String nombreusu) {
+        this.nombreusu = nombreusu;
     }
 
     @Override
