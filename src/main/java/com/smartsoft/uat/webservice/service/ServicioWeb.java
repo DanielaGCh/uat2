@@ -184,8 +184,7 @@ public class ServicioWeb {
     public String getUbicacion(@WebParam(name = "matricula") String matricula) {
         System.out.println(matricula);
        UbicacionController controller = new UbicacionController();
-       
-        return controller.obtenerUbicacionAlumno(matricula,ubicacionBusiness);
+           return controller.obtenerUbicacionAlumno(matricula,ubicacionBusiness);
     }
 
     }

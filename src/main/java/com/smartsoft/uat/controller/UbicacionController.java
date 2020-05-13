@@ -108,7 +108,7 @@ public class UbicacionController implements Serializable{
  
  public String obtenerUbicacionAlumno(String matricula ,UbicacionBusiness business ){
      String coordenadas="";
-     List<Ubicacion> list = business.obtenerUbicacionAlumno(matricula);
+     List<Ubicacion> list = business.ubicacionAlumno(matricula);
      
      if (list != null){
          coordenadas = list.get(list.size()-1).getLatitud()+","+list.get(list.size()-1).getLongitud();
