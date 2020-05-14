@@ -160,20 +160,22 @@ public class ServicioWeb {
        @WebMethod(operationName = "SetUbicacion")
     public String SetUbicacion(@WebParam(name = "latitud") String latitud, 
             @WebParam(name = "longitud") String longitud,
-            @WebParam(name = "matricula") String matricula) {
+            @WebParam(name = "matricula") String matricula,
+            @WebParam(name = "nombreAlumno") String nombreAlumno) {
         UbicacionController controller = new UbicacionController();
+        UbicacionView view = new UbicacionView();
         Ubicacion nuevaUbicacion = new Ubicacion();
-           System.out.println("Holaaaaaaaa");
+          
         nuevaUbicacion= new Ubicacion();    
         nuevaUbicacion.setMatriculaAlumno(matricula);
        nuevaUbicacion.setLatitud(Double.parseDouble(longitud));
        nuevaUbicacion.setLatitud(Double.parseDouble(latitud));
-      
-       controller.nuevo(nuevaUbicacion);
+       nuevaUbicacion.setNombreAlumn(nombreAlumno);
+       controller.nuevoWS(nuevaUbicacion,view);
       
       
       System.out.println(latitud+","+longitud+","+matricula);
-        return controller.guardarWS(ubicacionBusiness);
+        return controller.guardarWS(ubicacionBusiness,view);
         
     }
 

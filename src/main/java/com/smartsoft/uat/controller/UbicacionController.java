@@ -65,8 +65,17 @@ public class UbicacionController implements Serializable{
         view.getEntity().setNombreAlumn(sesion.getView().getUsuario().getNombreCompleto());
        
     }
+        public void nuevoWS( Ubicacion ubicacion, UbicacionView view) {
+        view.setEntity(ubicacion);
+        view.setListaEntity(null);
+        view.getEntity().setIdUbicacion(0);
+        view.getEntity().setFecha(new Date());
+        view.getEntity().setHora(new Date());
+       
+       
+    }
     
-     public String guardarWS(UbicacionBusiness business){
+     public String guardarWS(UbicacionBusiness business,UbicacionView view){
         
             if(view.getEntity()==null){
                 //sesion.MessageError("Introduce los datos correctamente");
